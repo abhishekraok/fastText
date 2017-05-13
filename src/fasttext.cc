@@ -32,7 +32,7 @@ void FastText::getVector(Vector& vec, const std::string& word) {
 }
 
 void FastText::saveVectors() {
-  std::ofstream ofs(args_->output + ".vec");
+  std::ofstream ofs(args_->output);
   if (!ofs.is_open()) {
     std::cout << "Error opening file for saving vectors." << std::endl;
     exit(EXIT_FAILURE);
@@ -362,7 +362,6 @@ void FastText::train(std::shared_ptr<Args> args) {
   }
   model_ = std::make_shared<Model>(input_, output_, args_, 0);
 
-  saveModel();
   if (args_->model != model_name::sup) {
     saveVectors();
   }
