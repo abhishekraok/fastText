@@ -9,4 +9,5 @@ result
 *.VC.VC.opendb
 Debug
 Release
+.vs
 *.user
