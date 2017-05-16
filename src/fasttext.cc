@@ -37,7 +37,7 @@ void FastText::getVector(Vector& vec, const std::string& word) {
 }
 
 void FastText::saveVectors() {
-  std::ofstream ofs(args_->output);
+  std::ofstream ofs(args_->outputVector);
   if (!ofs.is_open()) {
     std::cerr << "Error opening file for saving vectors." << std::endl;
     exit(EXIT_FAILURE);
@@ -50,6 +50,7 @@ void FastText::saveVectors() {
     ofs << word << " " << vec << std::endl;
   }
   ofs.close();
+  std::cout << "Saved Word Vectors as " << args_->outputVector << std::endl;
 }
 
 void FastText::saveOutput() {
@@ -94,9 +95,7 @@ void FastText::saveModel() {
   std::string fn(args_->output);
   if (quant_) {
     fn += ".ftz";
-  } else {
-    fn += ".bin";
-  }
+  }   
   std::ofstream ofs(fn, std::ofstream::binary);
   if (!ofs.is_open()) {
     std::cerr << "Model file cannot be opened for saving!" << std::endl;
@@ -121,6 +120,7 @@ void FastText::saveModel() {
   }
 
   ofs.close();
+  std::cout << "Saved Model as " << fn << std::endl;
 }
 
 void FastText::loadModel(const std::string& filename) {
